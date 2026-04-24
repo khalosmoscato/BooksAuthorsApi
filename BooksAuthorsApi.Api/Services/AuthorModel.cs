@@ -5,17 +5,17 @@ namespace BooksAuthorsApi.Api.Services;
 
 public class AuthorModel
 {
-    private static readonly string _authorsPath = Path.Combine(AppContext.BaseDirectory, "Resources", "Authors.json");
-    private static readonly string _booksPath = Path.Combine(AppContext.BaseDirectory, "Resources", "Books.json");
+    private readonly string _authorsPath = Path.Combine(AppContext.BaseDirectory, "Resources", "Authors.json");
+    private readonly string _booksPath = Path.Combine(AppContext.BaseDirectory, "Resources", "Books.json");
 
-    public static List<Author> GetAuthors()
+    public List<Author> GetAuthors()
     {
         var json = File.ReadAllText(_authorsPath);
         var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
         return JsonSerializer.Deserialize<List<Author>>(json, options) ?? new List<Author>();
     }
 
-    public static List<Book> GetBooks()
+    public List<Book> GetBooks()
     {
         var json = File.ReadAllText(_booksPath);
         var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
