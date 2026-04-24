@@ -26,4 +26,9 @@ public class AuthorModel
         var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
         return JsonSerializer.Deserialize<List<Book>>(json, options) ?? new List<Book>();
     }
+
+    public Book? GetBookById(int id)
+    {
+        return GetBooks().FirstOrDefault(a => a.Id == id);
+    }
 }

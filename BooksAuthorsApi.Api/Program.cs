@@ -6,6 +6,7 @@ builder.Services.AddControllers();
 
 builder.Services.AddScoped<AuthorService>();
 builder.Services.AddScoped<AuthorModel>();
+builder.Services.AddScoped<BookService>();
 
 var app = builder.Build();
 

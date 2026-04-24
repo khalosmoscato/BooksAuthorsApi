@@ -1,0 +1,35 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using BooksAuthorsApi.Api.Models;
+using BooksAuthorsApi.Api.Services;
+
+namespace BooksAuthorsApi.Api.Controllers;
+
+[ApiController]
+[Route("api/[controller]")]
+public class BooksController : ControllerBase
+{
+    private readonly BookService _bookService;
+
+    public BooksController(BookService bookService)
+    {
+        _bookService = bookService;
+    }
+
+    [HttpGet]
+    public ActionResult<List<Book>> GetAll()
+    {
+        var books = _bookService.GetAllBooks();
+        if (books == null) return NotFound();
+        return Ok(books);
+    }
+
+    [HttpGet("{id}")]
+    public ActionResult<Book> GetById(int id)
+    {
+        var book = _bookService.GetBookById(id);
+
+        if (book == null) return NotFound($"Book with ID {id} not found.");
+
+        return Ok(book);
+    }
+}
