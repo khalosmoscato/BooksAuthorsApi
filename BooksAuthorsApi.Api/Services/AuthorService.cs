@@ -1,6 +1,6 @@
 ﻿namespace BooksAuthorsApi.Api.Services
 {
-    public class Class
+    public class AuthorService
     {
     }
 }

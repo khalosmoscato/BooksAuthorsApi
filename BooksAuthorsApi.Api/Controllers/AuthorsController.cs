@@ -1,6 +1,6 @@
 ﻿namespace BooksAuthorsApi.Api.Controllers
 {
-    public class Class1
+    public class AuthorsController
     {
     }
 }
