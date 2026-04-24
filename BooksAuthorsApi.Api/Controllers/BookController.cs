@@ -32,4 +32,18 @@ public class BooksController : ControllerBase
 
         return Ok(book);
     }
+
+    [HttpPost]
+    public ActionResult<Book> Create(Book newBook)
+    {
+        try
+        {
+            var createdBook = _bookService.AddBook(newBook);
+            return CreatedAtAction(nameof(GetById), new { id = createdBook.Id }, createdBook);
+        }
+        catch (ArgumentException ex)
+        {
+            return BadRequest(ex.Message);
+        }
+    }
 }

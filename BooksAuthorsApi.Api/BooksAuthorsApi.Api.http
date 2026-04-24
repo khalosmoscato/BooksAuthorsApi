@@ -7,3 +7,14 @@ Content-Type: application/json
   "name": "Isabel Allende",
   "nationality": "Chilean"
 }
+
+###
+
+POST {{BooksAuthorsApi.Api_HostAddress}}/api/books
+Content-Type: application/json
+
+{
+  "title": "The House of the Spirits",
+  "authorId": 11,
+  "year": 1982
+}

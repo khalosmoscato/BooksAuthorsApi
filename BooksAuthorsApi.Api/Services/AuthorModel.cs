@@ -50,4 +50,23 @@ public class AuthorModel
     {
         return GetBooks().FirstOrDefault(a => a.Id == id);
     }
+
+    public void AddBook(Book book)
+    {
+        var books = GetBooks();
+
+        int newId = books.Any() ? books.Max(b => b.Id) + 1 : 1;
+        book.Id = newId;
+
+        books.Add(book);
+
+        SaveBooks(books);
+    }
+
+    public void SaveBooks(List<Book> books)
+    {
+        var options = new JsonSerializerOptions { WriteIndented = true };
+        var json = JsonSerializer.Serialize(books, options);
+        File.WriteAllText(_booksPath, json);
+    }
 }
