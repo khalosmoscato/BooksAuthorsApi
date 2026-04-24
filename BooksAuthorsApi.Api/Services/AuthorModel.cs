@@ -15,6 +15,11 @@ public class AuthorModel
         return JsonSerializer.Deserialize<List<Author>>(json, options) ?? new List<Author>();
     }
 
+    public Author? GetAuthorById(int id)
+    {
+        return GetAuthors().FirstOrDefault(a => a.Id == id);
+    }
+
     public List<Book> GetBooks()
     {
         var json = File.ReadAllText(_booksPath);

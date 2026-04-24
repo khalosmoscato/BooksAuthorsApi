@@ -1,4 +1,5 @@
 ﻿using BooksAuthorsApi.Api.Models;
+using System.Reflection.Metadata.Ecma335;
 
 namespace BooksAuthorsApi.Api.Services
 {
@@ -21,6 +22,15 @@ namespace BooksAuthorsApi.Api.Services
             }
 
             return authors;
+        }
+
+        public Author? GetAuthorById(int id)
+        {
+            var author = _authorModel.GetAuthorById(id);
+
+            if (author != null) author.Books = [];
+
+            return author;
         }
     }
 }

@@ -22,4 +22,14 @@ public class AuthorsController : ControllerBase
         if (authors == null) return NotFound();
         return Ok(authors);
     }
+
+    [HttpGet("{id}")]
+    public ActionResult<Author> GetById(int id)
+    {
+        var author = _authorService.GetAuthorById(id);
+
+        if (author == null) return NotFound($"Author with ID {id} not found.");
+
+        return Ok(author);
+    }
 }
