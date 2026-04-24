@@ -32,4 +32,18 @@ public class AuthorsController : ControllerBase
 
         return Ok(author);
     }
+
+    [HttpPost]
+    public ActionResult<Author> Create(Author newAuthor)
+    {
+        try
+        {
+            var createdAuthor = _authorService.AddAuthor(newAuthor);
+            return CreatedAtAction(nameof(GetById), new { id = createdAuthor.Id }, createdAuthor);
+        }
+        catch (ArgumentException ex)
+        {
+            return BadRequest(ex.Message);
+        }
+    }
 }

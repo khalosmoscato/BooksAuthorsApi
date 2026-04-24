@@ -40,6 +40,11 @@ This project follows a 4-tier layered architecture to ensure a clean **Separatio
 
 ## 🛤️ Endpoints (In Progress)
 
+## ✅ Testing
+To ensure reliability, endpoints are tested directly within **Visual Studio 2026** using the **Endpoints Explorer** and `.http` files. This allows for rapid verification of HTTP status codes and JSON response bodies.
+
+![API Testing in Visual Studio](./docs/api-testing-vs.png)
+
 ### Authors
 - `GET /api/authors` - Retrieve all authors with basic details.
 - `GET /api/authors/{id}` - Retrieve a specific author by their unique ID.

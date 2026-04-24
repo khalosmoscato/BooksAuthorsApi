@@ -20,6 +20,25 @@ public class AuthorModel
         return GetAuthors().FirstOrDefault(a => a.Id == id);
     }
 
+    public void AddAuthor(Author newAuthor)
+    {
+        var authors = GetAuthors();
+
+        int newId = authors.Any() ? authors.Max(a => a.Id) + 1 : 1;
+        newAuthor.Id = newId;
+
+        authors.Add(newAuthor);
+
+        SaveAuthors(authors); // calls the funciton below, because we need to save the newly added author into our Authors.json
+    }
+
+    private void SaveAuthors(List<Author> authors) // to save the authors we are posting
+    {
+        var options = new JsonSerializerOptions { WriteIndented = true };
+        var json = JsonSerializer.Serialize(authors, options);
+        File.WriteAllText(_authorsPath, json);
+    }
+
     public List<Book> GetBooks()
     {
         var json = File.ReadAllText(_booksPath);

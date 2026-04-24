@@ -1,0 +1,9 @@
+﻿@BooksAuthorsApi.Api_HostAddress = https://localhost:7289
+
+POST {{BooksAuthorsApi.Api_HostAddress}}/api/authors
+Content-Type: application/json
+
+{
+  "name": "Isabel Allende",
+  "nationality": "Chilean"
+}

@@ -32,5 +32,13 @@ namespace BooksAuthorsApi.Api.Services
 
             return author;
         }
+
+        public Author AddAuthor(Author author)
+        {
+            if (string.IsNullOrWhiteSpace(author.Name)) throw new ArgumentException("Author name cannot be empty");
+
+            _authorModel.AddAuthor(author);
+            return author;
+        }
     }
 }
