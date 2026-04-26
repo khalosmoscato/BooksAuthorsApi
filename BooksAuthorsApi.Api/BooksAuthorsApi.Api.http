@@ -20,18 +20,7 @@ Content-Type: application/json
 }
 
 ###
-
-@id=11
+@id = 11
 DELETE {{BooksAuthorsApi.Api_HostAddress}}/api/authors/{{id}}
-
-###
-
-@id=10
-DELETE {{BooksAuthorsApi.Api_HostAddress}}/api/books/{{id}}
-
-###
-
-@authorId=1
-GET {{BooksAuthorsApi.Api_HostAddress}}/api/books/author/{{authorId}}
 
 ###

@@ -49,6 +49,12 @@ public class AuthorModel
         authors.Remove(author);
 
         SaveAuthors(authors);
+
+        var books = GetBooks(); // if we delete an author from our authors list, its books get deleted too
+        var updatedBooks = books.Where(b => b.AuthorId != id).ToList();
+
+        SaveBooks(updatedBooks);
+
         return true;
     }
 
@@ -96,7 +102,7 @@ public class AuthorModel
         return true;
     }
 
-    public List<Book> GetBookByAuthor(int authorId)
+    public List<Book> GetBooksByAuthor(int authorId)
     {
         var books = GetBooks();
         return books.Where(b => b.AuthorId == authorId).ToList();

@@ -1,4 +1,5 @@
 ﻿using BooksAuthorsApi.Api.Models;
+using BooksAuthorsApi.Api.Services;
 using System.Reflection.Metadata.Ecma335;
 
 namespace BooksAuthorsApi.Api.Services
@@ -18,7 +19,7 @@ namespace BooksAuthorsApi.Api.Services
 
             foreach (var author in authors)
             {
-                author.Books = []; // initialize list of books for each author, following the Author class properties
+                author.Books = _authorModel.GetBooksByAuthor(author.Id);
             }
 
             return authors;
@@ -28,7 +29,7 @@ namespace BooksAuthorsApi.Api.Services
         {
             var author = _authorModel.GetAuthorById(id);
 
-            if (author != null) author.Books = [];
+            if (author != null) author.Books = _authorModel.GetBooksByAuthor(id);
 
             return author;
         }

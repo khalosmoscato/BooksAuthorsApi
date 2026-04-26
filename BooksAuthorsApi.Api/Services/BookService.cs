@@ -28,7 +28,7 @@ namespace BooksAuthorsApi.Api.Services
         {
             var book = _authorModel.GetBookById(id);
 
-            if (book != null) book.Author = _authorModel.GetAuthorById(book.AuthorId); ;
+            if (book != null) book.Author = _authorModel.GetAuthorById(book.AuthorId);
 
             return book;
         }
@@ -56,7 +56,7 @@ namespace BooksAuthorsApi.Api.Services
             var author = _authorModel.GetAuthorById(authorId);
 
             if (author == null) throw new ArgumentException($"Cannnot find Author with ID {authorId}");
-            var books = _authorModel.GetBookByAuthor(authorId);
+            var books = _authorModel.GetBooksByAuthor(authorId);
 
             foreach (var book in books)
             {
