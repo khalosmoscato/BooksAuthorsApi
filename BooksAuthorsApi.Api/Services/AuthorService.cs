@@ -40,5 +40,10 @@ namespace BooksAuthorsApi.Api.Services
             _authorModel.AddAuthor(author);
             return author;
         }
+
+        public bool DeleteAuthor(int id)
+        {
+            return _authorModel.DeleteAuthor(id);
+        }
     }
 }

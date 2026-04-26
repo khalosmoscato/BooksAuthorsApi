@@ -46,4 +46,17 @@ public class AuthorsController : ControllerBase
             return BadRequest(ex.Message);
         }
     }
+
+    [HttpDelete("{id}")]
+    public IActionResult Delete(int id)
+    {
+        var deleted = _authorService.DeleteAuthor(id);
+
+        if (!deleted)
+        {
+            return NotFound($"Author with ID {id} not found.");
+        }
+
+        return NoContent();
+    }
 }

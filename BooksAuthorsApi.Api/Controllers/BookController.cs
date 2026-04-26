@@ -46,4 +46,17 @@ public class BooksController : ControllerBase
             return BadRequest(ex.Message);
         }
     }
+
+    [HttpDelete("{id}")]
+    public IActionResult Delete(int id)
+    {
+        var deleted = _bookService.DeleteBook(id);
+
+        if (!deleted)
+        {
+            return NotFound($"Book with ID {id} not found.");
+        }
+
+        return NoContent();
+    }
 }

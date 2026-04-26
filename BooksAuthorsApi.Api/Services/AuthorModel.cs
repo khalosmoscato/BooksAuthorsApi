@@ -39,6 +39,19 @@ public class AuthorModel
         File.WriteAllText(_authorsPath, json);
     }
 
+    public bool DeleteAuthor(int id)
+    {
+        var authors = GetAuthors();
+        var author = authors.FirstOrDefault(a => a.Id == id);
+
+        if (author == null) return false;
+
+        authors.Remove(author);
+
+        SaveAuthors(authors);
+        return true;
+    }
+
     public List<Book> GetBooks()
     {
         var json = File.ReadAllText(_booksPath);
@@ -68,5 +81,18 @@ public class AuthorModel
         var options = new JsonSerializerOptions { WriteIndented = true };
         var json = JsonSerializer.Serialize(books, options);
         File.WriteAllText(_booksPath, json);
+    }
+
+    public bool DeleteBook(int id)
+    {
+        var books = GetBooks();
+        var book = books.FirstOrDefault(b => b.Id == id);
+
+        if (book == null) return false;
+
+        books.Remove(book);
+
+        SaveBooks(books);
+        return true;
     }
 }
