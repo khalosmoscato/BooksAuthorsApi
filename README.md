@@ -2,19 +2,25 @@
 
 A RESTful Web API built with **ASP.NET Core 10** demonstrating the **Model-View-Controller (MVC)** architectural pattern. 
 
-## 🏗️ Architecture
-This project follows a 4-tier layered architecture to ensure a clean **Separation of Concerns**:
+## 🏗️ Architecture & Engineering Principles
+This project follows a 4-tier layered architecture to ensure a clean **Separation of Concerns**, mimicking professional Enterprise patterns:
 
-* **Controllers**: Handle HTTP requests and responses.
-* **Services**: Manage business logic, data transformation, and validation.
-* **Models (Data Layer)**: Manage data persistence and retrieval from JSON resources.
-* **Resources**: Static JSON files acting as the mock data store.
+* **Controllers**: Entry points handling HTTP traffic and status codes.
+* **Services**: Data orchestration, business logic, and "Hydration" (joining related objects).
+* **Models (Data Access)**: Repository-style layer managing file I/O and **Referential Integrity**.
+* **Resources**: Persistent JSON storage.
+
+### Key Features
+* **Referential Integrity**: Prevents "orphan" books by validating `AuthorId` during creation.
+* **Cascade Delete**: Automatically purges all associated books when an Author is deleted to maintain a clean data store.
+* **Bi-directional Hydration**: Automatically maps relationships so that Books include Author details, and Authors include their collection of Books.
 
 ## 🛠️ Tech Stack
-* **.NET 10.0**
+* **.NET 10.0** (The latest LTS release)
 * **ASP.NET Core Web API**
-* **C#**
-* **System.Text.Json** for data serialisation
+* **C# 14**
+* **LINQ** for advanced data querying and filtering.
+* **System.Text.Json** for high-performance serialisation.
 
 ## 🚀 Getting Started
 
@@ -38,7 +44,24 @@ This project follows a 4-tier layered architecture to ensure a clean **Separatio
    dotnet run --project BooksAuthorsApi.Api
    ```
 
-## 🛤️ Endpoints (In Progress)
+## 🛤️ API Endpoints
+
+### ✍️ Authors
+| Method | Endpoint | Description |
+| :--- | :--- | :--- |
+| `GET` | `/api/authors` | List all authors (Includes nested books) |
+| `GET` | `/api/authors/{id}` | Get author by ID (Includes nested books) |
+| `POST` | `/api/authors` | Create a new author |
+| `DELETE` | `/api/authors/{id}` | Delete author (Triggers **Cascade Delete** on books) |
+
+### 📚 Books
+| Method | Endpoint | Description |
+| :--- | :--- | :--- |
+| `GET` | `/api/books` | List all books (Includes Author details) |
+| `GET` | `/api/books/{id}` | Get book by ID (Includes Author details) |
+| `GET` | `/api/books/author/{id}` | Get all books by a specific Author |
+| `POST` | `/api/books` | Create a book (Validates Author existence) |
+| `DELETE` | `/api/books/{id}` | Delete a specific book |
 
 ## ✅ Testing
 To ensure reliability, endpoints are tested directly within **Visual Studio 2026** using the **Endpoints Explorer** and `.http` files. This allows for rapid verification of HTTP status codes and JSON response bodies.
