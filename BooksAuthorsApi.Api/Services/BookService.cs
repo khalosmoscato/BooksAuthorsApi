@@ -18,7 +18,7 @@ namespace BooksAuthorsApi.Api.Services
 
             foreach (var book in books)
             {
-                book.Author = null;
+                book.Author = _authorModel.GetAuthorById(book.AuthorId);
             }
 
             return books;
@@ -28,7 +28,7 @@ namespace BooksAuthorsApi.Api.Services
         {
             var book = _authorModel.GetBookById(id);
 
-            if (book != null) book.Author = null;
+            if (book != null) book.Author = _authorModel.GetAuthorById(book.AuthorId); ;
 
             return book;
         }
@@ -49,6 +49,21 @@ namespace BooksAuthorsApi.Api.Services
         public bool DeleteBook(int id)
         {
             return _authorModel.DeleteBook(id);
+        }
+
+        public List<Book> GetBooksByAuthor(int authorId)
+        {
+            var author = _authorModel.GetAuthorById(authorId);
+
+            if (author == null) throw new ArgumentException($"Cannnot find Author with ID {authorId}");
+            var books = _authorModel.GetBookByAuthor(authorId);
+
+            foreach (var book in books)
+            {
+                book.Author = author;
+            }
+
+            return books;
         }
     }
 }

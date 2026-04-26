@@ -95,4 +95,10 @@ public class AuthorModel
         SaveBooks(books);
         return true;
     }
+
+    public List<Book> GetBookByAuthor(int authorId)
+    {
+        var books = GetBooks();
+        return books.Where(b => b.AuthorId == authorId).ToList();
+    }
 }

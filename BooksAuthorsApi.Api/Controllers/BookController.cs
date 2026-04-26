@@ -59,4 +59,11 @@ public class BooksController : ControllerBase
 
         return NoContent();
     }
+
+    [HttpGet("author/{authorId}")]
+    public ActionResult<IEnumerable<Book>> GetByAuthor(int authorId)
+    {
+        var books = _bookService.GetBooksByAuthor(authorId);
+        return Ok(books);
+    }
 }

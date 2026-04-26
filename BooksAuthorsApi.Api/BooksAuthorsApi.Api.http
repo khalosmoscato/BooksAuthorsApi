@@ -30,3 +30,8 @@ DELETE {{BooksAuthorsApi.Api_HostAddress}}/api/authors/{{id}}
 DELETE {{BooksAuthorsApi.Api_HostAddress}}/api/books/{{id}}
 
 ###
+
+@authorId=1
+GET {{BooksAuthorsApi.Api_HostAddress}}/api/books/author/{{authorId}}
+
+###
